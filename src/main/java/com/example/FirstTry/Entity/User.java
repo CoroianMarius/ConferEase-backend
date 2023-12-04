@@ -1,11 +1,43 @@
 package com.example.FirstTry.Entity;
 
+
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+@Entity
+@Table(name="Users")
 public class User {
+    @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            generator = "user_sequence"
+    )
     private int id;
     private String email;
     private boolean isAdmin;
     private String password;
     private String depart;
+
+    public Set<Conference> getConferences() {
+        return conferences;
+    }
+
+    public void setConferences(Set<Conference> conferences) {
+        this.conferences = conferences;
+    }
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_conference",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "conference_id")
+    )
+    private Set<Conference> conferences = new HashSet<>();
 
     public User() {
     }
@@ -16,6 +48,7 @@ public class User {
         this.isAdmin = isAdmin;
         this.password = password;
         this.depart = depart;
+
     }
 
     public int getId() {

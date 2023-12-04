@@ -1,9 +1,26 @@
 package com.example.FirstTry.Entity;
 
+
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+
+@Entity
+@Table(name="Conferences")
 public class Conference {
+    @Id
+    @SequenceGenerator(
+            name = "conference_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            generator = "conference_sequence",
+            strategy = GenerationType.SEQUENCE
+    )
     private int id;
     private String text;
     private Date start;
@@ -11,11 +28,13 @@ public class Conference {
     private String color;
     private String location;
     private String type;
-    private ArrayList<String> invites;
+    //I want to add a list of users who are invited to the conference
+    @ManyToMany(mappedBy = "conferences")
+    private Set<User> invites = new HashSet<>();
     private boolean isPublic;
 
 
-    public Conference(int id, String text, Date start, Date end, String color, String location, String type, ArrayList<String> invites, boolean isPublic) {
+    public Conference(int id, String text, Date start, Date end, String color, String location, String type, Set<User> invites, boolean isPublic) {
         this.id = id;
         this.text = text;
         this.start = start;
@@ -86,11 +105,11 @@ public class Conference {
         this.type = type;
     }
 
-    public ArrayList<String> getInvites() {
+    public Set<User> getInvites() {
         return invites;
     }
 
-    public void setInvites(ArrayList<String> invites) {
+    public void setInvites(Set<User> invites) {
         this.invites = invites;
     }
 
