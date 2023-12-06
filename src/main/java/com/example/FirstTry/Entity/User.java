@@ -10,14 +10,9 @@ import java.util.Set;
 @Table(name="Users")
 public class User {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(unique = true)
     private String email;
     private boolean isAdmin;
     private String password;

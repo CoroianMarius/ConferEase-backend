@@ -13,14 +13,7 @@ import java.util.Set;
 @Table(name="Conferences")
 public class Conference {
     @Id
-    @SequenceGenerator(
-            name = "conference_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            generator = "conference_sequence",
-            strategy = GenerationType.SEQUENCE
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String text;
     private Date start;
