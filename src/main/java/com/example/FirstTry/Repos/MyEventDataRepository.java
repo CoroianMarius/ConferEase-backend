@@ -16,10 +16,10 @@ public interface MyEventDataRepository extends JpaRepository<MyEventData, Intege
     List<MyEventData> findConferencesByEmail(@Param("email") String email);
 
     //get the past conferences of a user by email
-    @Query("SELECT c FROM MyEventData c WHERE c.end < CURRENT_DATE AND c.owner = :email OR :email MEMBER OF c.invitees")
+    @Query("SELECT c FROM MyEventData c WHERE c.end < CURRENT_DATE AND (c.owner = :email OR :email MEMBER OF c.invitees)")
     List<MyEventData> findPastConferencesByEmail(@Param("email") String email);
 
-    @Query("SELECT c FROM MyEventData c WHERE c.start > CURRENT_DATE AND c.owner = :email OR :email MEMBER OF c.invitees")
+    @Query("SELECT c FROM MyEventData c WHERE c.start > CURRENT_DATE AND (c.owner = :email OR :email MEMBER OF c.invitees)")
     List<MyEventData> findFutureConferencesByEmail(@Param("email") String email);
 
     //get that returns the conferences of a department
