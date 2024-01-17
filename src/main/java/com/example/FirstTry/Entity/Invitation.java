@@ -8,41 +8,50 @@ public class Invitation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int conferenceId;
-    private int userId;
-    private boolean isAccepted;
+    private int meetId;
+    private String email;
+    private int statusId;
 
-    public Invitation(int id, int conferenceId, int userId, boolean isAccepted) {
+
+    public Invitation(int id, int meetId, String email, int statusId) {
         this.id = id;
-        this.conferenceId = conferenceId;
-        this.userId = userId;
-        this.isAccepted = isAccepted;
+        this.meetId = meetId;
+        this.email = email;
+        this.statusId = statusId;
     }
 
     public Invitation() {
     }
 
-    public int getConferenceId() {
-        return conferenceId;
+    public int getId() {
+        return id;
     }
 
-    public void setConferenceId(int conferenceId) {
-        this.conferenceId = conferenceId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getMeetId() {
+        return meetId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setMeetId(int meetId) {
+        this.meetId = meetId;
     }
 
-    public boolean isAccepted() {
-        return isAccepted;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAccepted(boolean accepted) {
-        isAccepted = accepted;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
     }
 }

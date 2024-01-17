@@ -10,40 +10,22 @@ import java.util.Set;
 @Table(name="Users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique = true)
+    private String name;
     private String email;
-    private boolean isAdmin;
     private String password;
-    private String depart;
-
-    public Set<Conference> getConferences() {
-        return conferences;
-    }
-
-    public void setConferences(Set<Conference> conferences) {
-        this.conferences = conferences;
-    }
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_conference",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "conference_id")
-    )
-    private Set<Conference> conferences = new HashSet<>();
+    private String department;
 
     public User() {
     }
 
-    public User(int id, String email, boolean isAdmin, String password, String depart) {
+    public User(int id, String name, String email, String password, String department) {
         this.id = id;
+        this.name = name;
         this.email = email;
-        this.isAdmin = isAdmin;
         this.password = password;
-        this.depart = depart;
-
+        this.department = department;
     }
 
     public int getId() {
@@ -54,20 +36,20 @@ public class User {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
     }
 
     public String getPassword() {
@@ -78,11 +60,11 @@ public class User {
         this.password = password;
     }
 
-    public String getDepart() {
-        return depart;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepart(String depart) {
-        this.depart = depart;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }
